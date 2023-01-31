@@ -1,5 +1,6 @@
 import Card from '../components/Card';
 import React, { useState, useEffect } from 'react';
+import useSound from 'use-sound';
 
 interface Status {
   [key: number]: number;
@@ -9,6 +10,8 @@ export default function Home() {
   //set initial state of animals to an empty array
   const [cards, setCards] = useState([] as string[]);
   const [status, setStatus] = useState<Status>({});
+  const [playFlip] = useSound('/sounds/flip.mp3');
+  const [playMatch] = useSound('/sounds/match.mp3');
 
   //use effect, setAnimals to a shuffled array of animals
   useEffect(() => {
@@ -30,7 +33,7 @@ export default function Home() {
       return;
     }
 
-    playSound('flip');
+    playFlip();
 
     // iterate through statuses and find the value where status is 1
     let flipped: number = -1;
@@ -48,13 +51,13 @@ export default function Home() {
       //its a match!
       if (cards[i] === cards[flipped]) {
         setTimeout(() => {
-          playSound('match');
+          playMatch();
         }, 1000);
         setStatus({ ...status, [i]: 2, [flipped]: 2 });
       } else {
         setStatus({ ...status, [i]: 1 });
         setTimeout(() => {
-          playSound('flip');
+          playFlip();
           setStatus({ ...status, [i]: 0, [flipped]: 0 });
         }, 1000);
       }
@@ -76,8 +79,3 @@ export default function Home() {
     </>
   );
 }
-
-const playSound = (sound: string) => {
-  const audio = new Audio(`/sounds/${sound}.mp3`);
-  audio.play();
-};
