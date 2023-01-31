@@ -34,6 +34,7 @@
 }
 .flip-back {
   transform: rotateY(180deg);
+  background-color: lightgray;
   border: 6px solid lightseagreen;
   box-shadow: 6px 6px lightcoral;
 }
