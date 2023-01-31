@@ -30,7 +30,7 @@ export default function Home() {
       return;
     }
 
-    playCardFlipSound(cards[i]);
+    playSound('flip');
 
     // iterate through statuses and find the value where status is 1
     let flipped: number = -1;
@@ -56,7 +56,7 @@ export default function Home() {
         setTimeout(() => {
           playSound('flip');
           setStatus({ ...status, [i]: 0, [flipped]: 0 });
-        }, 2000);
+        }, 1000);
       }
     }
   };
@@ -76,17 +76,6 @@ export default function Home() {
     </>
   );
 }
-
-const playCardFlipSound = (value: string) => {
-  var msg = new SpeechSynthesisUtterance();
-  msg.text = value;
-
-  playSound('flip');
-  //wait for audio to finish playing
-  setTimeout(() => {
-    window.speechSynthesis.speak(msg);
-  }, 200);
-};
 
 const playSound = (sound: string) => {
   const audio = new Audio(`/sounds/${sound}.mp3`);
