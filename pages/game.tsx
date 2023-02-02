@@ -99,7 +99,16 @@ export async function getServerSideProps(context: any) {
   // context contains information about the current request
   // and helper functions for processing the request/response
 
-  const values = context.query.values.toString().split(',');
+  const queryString = context.query.values;
+
+  let values = [];
+
+  if (!queryString || queryString.toString().split(',').length !== 8) {
+    values = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
+  } else {
+    values = context.query.values.toString().split(',');
+  }
+
   const cards = [...values, ...values].sort(() => Math.random() - 0.5);
 
   await fetchMP3s(values);
