@@ -1,6 +1,5 @@
 import Card from '../components/Card';
 import React, { useState } from 'react';
-import fetchMP3s from '../lib/fetchMP3s';
 import { Howl } from 'howler';
 
 interface Status {
@@ -110,8 +109,6 @@ export async function getServerSideProps(context: any) {
   }
 
   const cards = [...values, ...values].sort(() => Math.random() - 0.5);
-
-  await fetchMP3s(values);
 
   return {
     props: {
