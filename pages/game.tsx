@@ -1,6 +1,7 @@
 import Card from '../components/Card';
 import React, { useState } from 'react';
 import { Howl } from 'howler';
+import db from '../db/db.js';
 
 interface Status {
   [key: number]: number;
@@ -79,8 +80,7 @@ export default function Game({ cards, values }: GameProps) {
   };
 
   return (
-    <>
-      <h1 className='text-4xl text-center font-semibold m-10'>Matching Game</h1>
+    <div className='w-full pt-8'>
       {gameState && (
         <div className='h-4/5 w-4/5 mx-auto grid grid-cols-4 gap-4'>
           {cards.map((x, i) => (
@@ -90,23 +90,24 @@ export default function Game({ cards, values }: GameProps) {
           ))}
         </div>
       )}
-    </>
+    </div>
   );
 }
 
 export async function getServerSideProps(context: any) {
-  // context contains information about the current request
-  // and helper functions for processing the request/response
-
-  const queryString = context.query.values;
-
-  let values = [];
-
-  if (!queryString || queryString.toString().split(',').length !== 8) {
-    values = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
-  } else {
-    values = context.query.values.toString().split(',');
+  // create an array with the values 0 to 25
+  const temp = [];
+  for (let i = 0; i < db.letters.length; i++) {
+    temp.push(i);
   }
+  temp.sort(() => Math.random() - 0.5);
+
+  const values = [];
+  for (let i = 0; i < 8; i++) {
+    values.push(db.letters[temp[i]]);
+  }
+
+  console.log(values);
 
   const cards = [...values, ...values].sort(() => Math.random() - 0.5);
 

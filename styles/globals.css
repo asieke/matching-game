@@ -3,8 +3,8 @@
 @tailwind utilities;
 
 .flip {
-  width: 100%;
-  height: 150px;
+  width: 240px;
+  height: 160px;
   text-align: center;
   perspective: 600px;
   cursor: pointer;
@@ -27,16 +27,11 @@
   width: 100%;
   line-height: 150px;
   backface-visibility: hidden;
-  color: #fff;
-  background-color: lightseagreen;
-  border: 6px solid lightcoral;
-  box-shadow: 6px 6px lightseagreen;
+  border: 4px solid black;
 }
 .flip-back {
   transform: rotateY(180deg);
   background-color: lightgray;
-  border: 6px solid lightseagreen;
-  box-shadow: 6px 6px lightcoral;
 }
 
 .card-label {
