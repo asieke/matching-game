@@ -19,6 +19,8 @@ type GameProps = {
 type SoundMap = { [key: string]: Howl };
 
 export default function Game({ cards, values, cardWidth, cardHeight, columns }: GameProps) {
+  console.log('GAME>>>', cards, values, cardWidth, cardHeight, columns);
+
   //set initial state of animals to an empty array
   const [gameState, setGameState] = useState(true);
   const [status, setStatus] = useState<Status>({});

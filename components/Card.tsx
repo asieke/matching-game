@@ -11,6 +11,7 @@ type CardProps = {
 };
 
 const Card = ({ value, flipped, handler, width, height }: CardProps) => {
+  console.log('CARD>>>', value, flipped, handler, width, height);
   // const flip = () => {
   //   setFlipped(!flipped);
   //   var msg = new SpeechSynthesisUtterance();
