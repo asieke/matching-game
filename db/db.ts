@@ -1,4 +1,8 @@
-const db = {
+//create a type for db
+
+type Db = Record<string, string[]>;
+
+const db: Db = {
   letters: [
     'A',
     'B',
@@ -51,4 +55,4 @@ const db = {
   ],
 };
 
-module.exports = db;
+export default db;

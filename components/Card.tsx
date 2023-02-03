@@ -5,10 +5,12 @@ import Image from 'next/image';
 type CardProps = {
   value: string;
   flipped: boolean;
+  width: number;
+  height: number;
   handler: () => void;
 };
 
-const Card = ({ value, flipped, handler }: CardProps) => {
+const Card = ({ value, flipped, handler, width, height }: CardProps) => {
   // const flip = () => {
   //   setFlipped(!flipped);
   //   var msg = new SpeechSynthesisUtterance();
@@ -22,10 +24,13 @@ const Card = ({ value, flipped, handler }: CardProps) => {
   //   }, 200);
   // };
 
-  const path = `card-images/${value}.png`;
+  const isNum = !isNaN(Number(value));
+  const path = isNum ? `images/number-card.png` : `card-images/${value}.png`;
+
+  const className = `flip w-[${width}px] h-[${height}px]`;
 
   return (
-    <div className='flip' onClick={handler}>
+    <div className={className} onClick={handler}>
       <div className={(flipped ? ' flip-clicked' : '') + ' flip-content'}>
         <div
           className='flip-front bg-center bg-cover text-left align-middle shadow-xl rounded-lg'

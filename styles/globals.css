@@ -3,8 +3,6 @@
 @tailwind utilities;
 
 .flip {
-  width: 240px;
-  height: 160px;
   text-align: center;
   perspective: 600px;
   cursor: pointer;
