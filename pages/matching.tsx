@@ -11,15 +11,13 @@ interface Status {
 type GameProps = {
   cards: string[];
   values: string[];
-  cardWidth: number;
-  cardHeight: number;
   columns: number;
 };
 
 type SoundMap = { [key: string]: Howl };
 
-export default function Game({ cards, values, cardWidth, cardHeight, columns }: GameProps) {
-  console.log('GAME>>>', cards, values, cardWidth, cardHeight, columns);
+export default function Game({ cards, values, columns }: GameProps) {
+  console.log('GAME>>>', cards, values, columns);
 
   //set initial state of animals to an empty array
   const [gameState, setGameState] = useState(true);
@@ -101,21 +99,14 @@ export default function Game({ cards, values, cardWidth, cardHeight, columns }: 
     }
   };
 
+  const className = `mx-auto grid grid-cols-${columns} gap-3 bg-blue-300 h-full`;
   return (
-    <div className='align-items-center'>
+    <div className='w-full bg-slate-200 p-5 h-screen'>
       {gameState && (
-        <div
-          className={`h-[800px] w-[1200px] mx-auto grid grid-cols-${columns} gap-3 p-5 bg-slate-200`}
-        >
+        <div className={className}>
           {cards.map((x, i) => (
             <div key={i}>
-              <Card
-                value={x}
-                flipped={!!status[i]}
-                handler={() => handleClick(i)}
-                width={cardWidth}
-                height={cardHeight}
-              />
+              <Card value={x} flipped={!!status[i]} handler={() => handleClick(i)} />
             </div>
           ))}
         </div>
@@ -150,8 +141,6 @@ export async function getServerSideProps(context: any) {
     values.push(db[category][temp[i]]);
   }
 
-  const cardHeight = n == 16 ? 180 : 160;
-  const cardWidth = n == 16 ? 240 : 180;
   const columns = n == 16 ? 4 : 6;
 
   const cards = [...values, ...values].sort(() => Math.random() - 0.5);
@@ -160,8 +149,6 @@ export async function getServerSideProps(context: any) {
     props: {
       cards,
       values,
-      cardHeight,
-      cardWidth,
       columns,
     },
   };

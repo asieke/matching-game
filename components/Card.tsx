@@ -5,13 +5,11 @@ import Image from 'next/image';
 type CardProps = {
   value: string;
   flipped: boolean;
-  width: number;
-  height: number;
   handler: () => void;
 };
 
-const Card = ({ value, flipped, handler, width, height }: CardProps) => {
-  console.log('CARD>>>', value, flipped, handler, width, height);
+const Card = ({ value, flipped, handler }: CardProps) => {
+  console.log('CARD>>>', value, flipped, handler);
   // const flip = () => {
   //   setFlipped(!flipped);
   //   var msg = new SpeechSynthesisUtterance();
@@ -28,22 +26,20 @@ const Card = ({ value, flipped, handler, width, height }: CardProps) => {
   const isNum = !isNaN(Number(value));
   const path = isNum ? `images/number-card.png` : `card-images/${value}.png`;
 
-  const className = `flip w-[${width}px] h-[${height}px]`;
-
   return (
-    <div className={className} onClick={handler}>
-      <div className={(flipped ? ' flip-clicked' : '') + ' flip-content'}>
+    <div onClick={handler} className='w-full h-full'>
+      <div className={(flipped ? ' flip-clicked' : '') + ' flip-content w-full h-full'}>
         <div
-          className='flip-front bg-center bg-cover text-left align-middle shadow-xl rounded-lg'
+          className='flip-front bg-center bg-cover text-left align-middle shadow-xl rounded-lg w-full h-full'
           style={{ backgroundImage: `url('images/pattern.png')` }}
         ></div>
         <div
-          className='flip-back bg-center bg-cover text-left align-middle rounded-lg shadow-xl'
+          className='flip-back bg-center bg-cover rounded-lg shadow-xl w-full h-full'
           style={{ backgroundImage: `url('${path}')` }}
         >
-          <p className='card-label text-white text-8xl font-bold outline-black-1px mt-5 ml-3'>
+          <div className='card-label text-white text-9xl flex w-full h-full items-center pl-3 font-bold'>
             {value}
-          </p>
+          </div>
         </div>
       </div>
     </div>

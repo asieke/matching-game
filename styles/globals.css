@@ -8,8 +8,6 @@
   cursor: pointer;
 }
 .flip-content {
-  width: 100%;
-  height: 100%;
   transition: transform 0.4s;
   transform-style: preserve-3d;
 }
@@ -21,8 +19,6 @@
 .flip-front,
 .flip-back {
   position: absolute;
-  height: 100%;
-  width: 100%;
   line-height: 150px;
   backface-visibility: hidden;
   border: 4px solid black;
