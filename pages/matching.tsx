@@ -11,13 +11,13 @@ interface Status {
 type GameProps = {
   cards: string[];
   values: string[];
-  columns: number;
+  className: string;
 };
 
 type SoundMap = { [key: string]: Howl };
 
-export default function Game({ cards, values, columns }: GameProps) {
-  console.log('GAME>>>', cards, values, columns);
+export default function Game({ cards, values, className }: GameProps) {
+  console.log('GAME>>>', cards, values, className);
 
   //set initial state of animals to an empty array
   const [gameState, setGameState] = useState(true);
@@ -99,7 +99,6 @@ export default function Game({ cards, values, columns }: GameProps) {
     }
   };
 
-  const className = `mx-auto grid grid-cols-${columns} gap-3 bg-blue-300 h-full`;
   return (
     <div className='w-full bg-slate-200 p-5 h-screen'>
       {gameState && (
@@ -142,6 +141,7 @@ export async function getServerSideProps(context: any) {
   }
 
   const columns = n == 16 ? 4 : 6;
+  const className = `mx-auto grid grid-cols-${columns} gap-3 bg-blue-300 h-full`;
 
   const cards = [...values, ...values].sort(() => Math.random() - 0.5);
 
@@ -149,7 +149,7 @@ export async function getServerSideProps(context: any) {
     props: {
       cards,
       values,
-      columns,
+      className,
     },
   };
 }
