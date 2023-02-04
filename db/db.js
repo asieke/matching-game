@@ -1,8 +1,7 @@
+'use strict';
 //create a type for db
 
-type Db = Record<string, string[]>;
-
-const db: Db = {
+var db = {
   letters: [
     'A',
     'B',
@@ -81,5 +80,4 @@ const db: Db = {
     'Tiger',
   ],
 };
-
-export default db;
+module.exports = db;
