@@ -102,7 +102,11 @@ export default function Game({ cards, values, className }: GameProps) {
   return (
     <div className='w-full bg-slate-200 p-5 h-screen'>
       {gameState && (
-        <div className='mx-auto grid grid-cols-4 gap-3 bg-blue-300 h-full'>
+        <div
+          className={`mx-auto grid ${
+            cards.length <= 16 ? 'grid-cols-4' : 'grid-cols-6'
+          } gap-3 bg-blue-300 h-full`}
+        >
           {cards.map((x, i) => (
             <div key={i}>
               <Card value={x} flipped={!!status[i]} handler={() => handleClick(i)} />
