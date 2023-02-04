@@ -102,7 +102,7 @@ export default function Game({ cards, values, className }: GameProps) {
   return (
     <div className='w-full bg-slate-200 p-5 h-screen'>
       {gameState && (
-        <div className={className}>
+        <div className='mx-auto grid grid-cols-4 gap-3 bg-blue-300 h-full'>
           {cards.map((x, i) => (
             <div key={i}>
               <Card value={x} flipped={!!status[i]} handler={() => handleClick(i)} />
@@ -141,7 +141,7 @@ export async function getServerSideProps(context: any) {
   }
 
   const columns = n == 16 ? 4 : 6;
-  const className = `mx-auto grid grid-cols-${columns} gap-3 bg-blue-300 h-full`;
+  const className = `mx-auto grid grid-cols-4 gap-3 bg-blue-300 h-full`;
 
   const cards = [...values, ...values].sort(() => Math.random() - 0.5);
 
