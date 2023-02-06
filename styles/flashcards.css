@@ -1,0 +1,65 @@
+.flashcards button.accept {
+  @apply bg-green-800 hover:bg-green-700 shadow-lg text-white text-xl p-6 rounded-md m-2;
+}
+
+.flashcards button.reject {
+  @apply bg-red-800 hover:bg-red-700 shadow-lg text-white text-xl p-6 rounded-md m-2;
+}
+
+.flashcards .card {
+  @apply bg-slate-700 text-white text-2xl rounded-xl w-96 absolute shadow-md;
+}
+
+.flashcards .moved-correct {
+  z-index: 4;
+  transition-delay: 0.1s;
+  transform: translateX(1000px) rotate3d(1, 1, 1, 10000deg);
+  opacity: 0;
+  transition-property: transform, opacity;
+  transition-duration: 1s;
+}
+
+.flashcards .moved-incorrect {
+  z-index: 4;
+  transition-delay: 0.1s;
+  transform: translateX(-1000px) rotate3d(1, 1, 1, 10000deg);
+  opacity: 0;
+  transition-property: transform, opacity;
+  transition-duration: 1s;
+}
+
+.flashcards .top {
+  z-index: 3;
+  transform: translateY(0px) translateX(0px);
+  transition-property: transform;
+  transition-duration: 1s;
+}
+
+.flashcards .oneback {
+  z-index: 2;
+  transform: translateY(10px) translateX(10px);
+  transition-property: transform;
+  transition-duration: 1s;
+}
+
+.flashcards .twoback {
+  z-index: 1;
+  transform: translateY(20px) translateX(20px);
+  transition-property: transform;
+  transition-duration: 1s;
+}
+
+.flashcards .bottom {
+  z-index: 0;
+  transform: translateY(20px) translateX(20px);
+  transition-property: transform;
+  transition-duration: 1s;
+}
+
+.flashcards .card img {
+  @apply rounded-t-xl w-full;
+}
+
+.flashcards .card div {
+  @apply p-4 flex items-center justify-center text-5xl font-extrabold;
+}

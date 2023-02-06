@@ -105,7 +105,7 @@ export default function Game({ cards, values, className }: GameProps) {
         <div
           className={`mx-auto grid ${
             cards.length <= 16 ? 'grid-cols-4' : 'grid-cols-6'
-          } gap-3 bg-blue-300 h-full`}
+          } gap-3 h-full`}
         >
           {cards.map((x, i) => (
             <div key={i}>

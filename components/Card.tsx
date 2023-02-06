@@ -37,7 +37,11 @@ const Card = ({ value, flipped, handler }: CardProps) => {
           className='flip-back bg-center bg-cover rounded-lg shadow-xl w-full h-full'
           style={{ backgroundImage: `url('${path}')` }}
         >
-          <div className='card-label text-white text-9xl flex w-full h-full items-center pl-3 font-bold'>
+          <div
+            className={`card-label text-white ${
+              value.length < 3 ? 'text-8xl' : 'text-4xl'
+            } flex w-full h-full place-items-end pl-3 font-bold`}
+          >
             {value}
           </div>
         </div>
