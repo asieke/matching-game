@@ -20,28 +20,35 @@ export default function Home() {
         Main Menu
       </button>
       {game === 'menu' && (
-        <div className='p-8'>
-          <SettingsCardNumber selected={numCards} onChange={setNumCards} />
-          <h1>Flash Cards</h1>
-          <div className='grid grid-cols-4 mt-3'>
-            <Tile label='Uppercase' onClick={() => setGame('uppercase')} />
-            <Tile label='Lowercase' onClick={() => setGame('lowercase')} />
-            <Tile label='Numbers' onClick={() => setGame('numbers')} />
-            <Tile label='Animals' onClick={() => setGame('animals')} />
-            <Tile label='Colors' onClick={() => setGame('colors')} />
-            <Tile label='Vehicles' onClick={() => setGame('vehicles')} />
+        <>
+          <div className='fixed z-40 top-0 left-0 w-full p-2 h-[64px] bg-black'>
+            <SettingsCardNumber selected={numCards} onChange={setNumCards} />
           </div>
-          <h1>Matching Game</h1>
 
-          <div className='grid grid-cols-4 mt-3'>
-            <Tile label='Uppercase' onClick={() => setGame('m-uppercase')} />
-            <Tile label='Lowercase' onClick={() => setGame('m-lowercase')} />
-            <Tile label='Numbers' onClick={() => setGame('m-numbers')} />
-            <Tile label='Animals' onClick={() => setGame('m-animals')} />
-            <Tile label='Colors' onClick={() => setGame('m-colors')} />
-            <Tile label='Vehicles' onClick={() => setGame('m-vehicles')} />
+          <div className='p-8'>
+            <h1>Flash Cards</h1>
+            <div className='grid grid-cols-4 mt-3'>
+              <Tile label='Uppercase' onClick={() => setGame('uppercase')} />
+              <Tile label='Lowercase' onClick={() => setGame('lowercase')} />
+              <Tile label='Numbers' onClick={() => setGame('numbers')} />
+              <Tile label='Animals' onClick={() => setGame('animals')} />
+              <Tile label='Colors' onClick={() => setGame('colors')} />
+              <Tile label='Vehicles' onClick={() => setGame('vehicles')} />
+              <Tile label='Sight Words' onClick={() => setGame('sight-words')} />
+            </div>
+            <h1>Matching Game</h1>
+
+            <div className='grid grid-cols-4 mt-3'>
+              <Tile label='Uppercase' onClick={() => setGame('m-uppercase')} />
+              <Tile label='Lowercase' onClick={() => setGame('m-lowercase')} />
+              <Tile label='Numbers' onClick={() => setGame('m-numbers')} />
+              <Tile label='Animals' onClick={() => setGame('m-animals')} />
+              <Tile label='Colors' onClick={() => setGame('m-colors')} />
+              <Tile label='Vehicles' onClick={() => setGame('m-vehicles')} />
+              <Tile label='Sight Words' onClick={() => setGame('m-sight-words')} />
+            </div>
           </div>
-        </div>
+        </>
       )}
       {game !== 'menu' && <Game game={game} setGame={setGame} numCards={numCards} />}
     </>
@@ -54,7 +61,7 @@ interface TileProps {
 }
 
 const Tile = ({ label, onClick }: TileProps) => {
-  const src = '/images/' + label.toLowerCase() + '.png';
+  const src = '/images/' + label.toLowerCase().replaceAll(' ', '-') + '.png';
   return (
     <div
       onClick={onClick}
@@ -97,10 +104,14 @@ const Game = ({ game, setGame, numCards }: GameProps) => {
     let deck = db.getRandom(numCards, 'vehicles');
     return <FlashCardGame initialDeck={deck} mainMenu={() => setGame('menu')} />;
   }
+  if (game === 'sight-words') {
+    let deck = db.getRandom(numCards, 'sight-words');
+    return <FlashCardGame initialDeck={deck} mainMenu={() => setGame('menu')} />;
+  }
   /* Matching Game */
   if (game === 'm-uppercase') {
     let deck = db.getMatchingCards(numCards / 2, 'uppercase');
-    return <MatchingGame initialDeck={deck} />;
+    return <MatchingGame initialDeck={deck} size='8xl' />;
   }
   if (game === 'm-lowercase') {
     let deck = db.getMatchingCards(numCards / 2, 'lowercase');
@@ -120,6 +131,11 @@ const Game = ({ game, setGame, numCards }: GameProps) => {
   }
   if (game === 'm-vehicles') {
     let deck = db.getMatchingCards(numCards / 2, 'vehicles');
+    let size = numCards === 16 ? '6xl' : numCards === 24 ? '5xl' : '4xl';
+    return <MatchingGame initialDeck={deck} size={size} />;
+  }
+  if (game === 'm-sight-words') {
+    let deck = db.getMatchingCards(numCards / 2, 'sight-words');
     return <MatchingGame initialDeck={deck} />;
   }
 

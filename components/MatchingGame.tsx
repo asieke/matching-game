@@ -10,11 +10,12 @@ interface Status {
 //create type for props
 type GameProps = {
   initialDeck: string[];
+  size?: string;
 };
 
 type SoundMap = { [key: string]: Howl };
 
-const MatchingGame = ({ initialDeck }: GameProps) => {
+const MatchingGame = ({ initialDeck, size = '8xl' }: GameProps) => {
   const cards = initialDeck;
   console.log(cards);
   //set initial state of animals to an empty array
@@ -107,7 +108,7 @@ const MatchingGame = ({ initialDeck }: GameProps) => {
         >
           {cards.map((x, i) => (
             <div key={i}>
-              <Card value={x} flipped={!!status[i]} handler={() => handleClick(i)} />
+              <Card value={x} flipped={!!status[i]} handler={() => handleClick(i)} size={size} />
             </div>
           ))}
         </div>

@@ -7,7 +7,7 @@
 }
 
 .flashcards .card {
-  @apply bg-slate-700 text-white rounded-xl w-96 absolute shadow-md;
+  @apply bg-slate-700 text-white rounded-xl w-[480px] absolute shadow-md;
 }
 
 .flashcards .moved-correct {

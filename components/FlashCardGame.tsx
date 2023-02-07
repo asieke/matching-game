@@ -93,12 +93,12 @@ const FlashCardGame = ({ initialDeck, mainMenu }: FlashProps) => {
             return (
               <div className={className} key={card.name}>
                 <Image src={src} width={300} height={300} alt={card.name} />
-                <div className={card.name.length > 12 ? 'text-2xl' : 'text-3xl'}>{card.name}</div>
+                <div className={card.name.length > 12 ? 'text-4xl' : 'text-6xl'}>{card.name}</div>
               </div>
             );
           })}
 
-          <div className='controls mt-96'>
+          <div className='controls mt-[480px]'>
             <button className='accept' onClick={() => handleClick(true)}>
               <span className='text-hidden'>Accept</span>
             </button>

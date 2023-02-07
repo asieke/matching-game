@@ -7,9 +7,11 @@ type CardProps = {
   value: string;
   flipped: boolean;
   handler: () => void;
+  //optional prop hide image
+  size?: string;
 };
 
-const Card = ({ value, flipped, handler }: CardProps) => {
+const Card = ({ value, flipped, handler, size = '8xl' }: CardProps) => {
   const isNum = !isNaN(Number(value));
   const path = db.getImgSrc(value);
 
@@ -25,11 +27,9 @@ const Card = ({ value, flipped, handler }: CardProps) => {
           style={{ backgroundImage: `url('${path}')` }}
         >
           <div
-            className={`card-label text-white ${
-              value.length < 3 ? 'text-8xl' : 'text-4xl'
-            } flex w-full h-full place-items-end pl-3 font-bold`}
+            className={`card-label font-extrabold text-${size} w-full h-full flex items-center justify-center text-center`}
           >
-            {value}
+            <span>{value}</span>
           </div>
         </div>
       </div>
