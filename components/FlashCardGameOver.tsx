@@ -1,5 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
+import db from '../db/db';
 
 type PropTypes = {
   stats: { [key: string]: number };
@@ -7,9 +8,10 @@ type PropTypes = {
 };
 
 const Card = ({ word }: { word: string }) => {
+  const src = db.getImgSrc(word);
   return (
     <div className='p-4 bg-slate-700 rounded-md text-center m-4'>
-      <Image src={`/card-images/${word}.png`} width={200} height={200} alt={word} />
+      <Image src={src} width={200} height={200} alt={word} />
       <div className='text-white mt-3 text-lg font-extrabold'>{word}</div>
     </div>
   );

@@ -42,6 +42,7 @@ const FlashCardGame = ({ initialDeck, mainMenu }: FlashProps) => {
   });
 
   const handleClick = (accepted: boolean) => {
+    if (top < 0) return;
     flip.play();
     let newDeck = [...deck];
     setStats({ ...stats, [deck[top].name]: stats[deck[top].name] + 1 });

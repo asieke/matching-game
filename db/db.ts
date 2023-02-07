@@ -120,13 +120,35 @@ const db: DBType = {
     { name: 'White', category: 'colors', src: 'white' },
     { name: 'Yellow', category: 'colors', src: 'yellow' },
     { name: 'Orange', category: 'colors', src: 'orange' },
+    { name: '18 Wheeler', category: 'vehicles', src: '18Wheeler' },
+    { name: 'Ambulance', category: 'vehicles', src: 'Ambulence' },
+    { name: 'Backhoe', category: 'vehicles', src: 'Backhoe' },
+    { name: 'Bike', category: 'vehicles', src: 'Bike' },
+    { name: 'Boat', category: 'vehicles', src: 'Boat' },
+    { name: 'Bulldozer', category: 'vehicles', src: 'Bulldozer' },
+    { name: 'Bus', category: 'vehicles', src: 'Bus' },
+    { name: 'Car', category: 'vehicles', src: 'Car' },
+    { name: 'Cement Mixer', category: 'vehicles', src: 'CementMixer' },
+    { name: 'Dump Truck', category: 'vehicles', src: 'DumpTruck' },
+    { name: 'Excavator', category: 'vehicles', src: 'Excavator' },
+    { name: 'Fire Truck', category: 'vehicles', src: 'FireTruck' },
+    { name: 'Helicopter', category: 'vehicles', src: 'Helicopter' },
+    { name: 'Hot Air Balloon', category: 'vehicles', src: 'HotAirBalloon' },
+    { name: 'Little Blue Truck', category: 'vehicles', src: 'LittleBlueTruck' },
+    { name: 'Plane', category: 'vehicles', src: 'Plane' },
+    { name: 'Police Car', category: 'vehicles', src: 'PoliceCar' },
+    { name: 'Race Car', category: 'vehicles', src: 'RaceCar' },
+    { name: 'Spaceship', category: 'vehicles', src: 'SpaceShip' },
+    { name: 'Submarine', category: 'vehicles', src: 'Submarine' },
+    { name: 'Train', category: 'vehicles', src: 'Train' },
+    { name: 'Trash Truck', category: 'vehicles', src: 'TrashTruck' },
   ],
   getImgSrc: (name) => {
     const item = db.data.find((item) => item.name === name);
     if (item) {
-      return 'https://res.cloudinary.com/dkit4ixkx/image/upload/v1/flashcards_small/' + item.src;
+      return '/card-images/' + item.src + '.png';
     } else {
-      return 'https://res.cloudinary.com/dkit4ixkx/image/upload/v1/flashcards_small/A';
+      return '/card-images/A.png';
     }
   },
   getRandom: (num, category) => {

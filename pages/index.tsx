@@ -16,10 +16,10 @@ export default function Home() {
           <h1>Flash Cards</h1>
           <div className='grid grid-cols-4 mt-3'>
             <div onClick={() => setGame('letters')}>
-              <Card word='Uppercase' image='/card-images/B.png' />
+              <Card word='Uppercase' image='/images/colors.png' />
             </div>
             <div onClick={() => setGame('letters-lowercase')}>
-              <Card word='Lowercase' image='/card-images/A.png' />
+              <Card word='Lowercase' image='/images/colors.png' />
             </div>
             <div onClick={() => setGame('numbers')}>
               <Card word='Numbers' image='/images/numbers.png' />
@@ -28,13 +28,16 @@ export default function Home() {
               <Card word='Animals' image='/images/animals.png' />
             </div>
             <div onClick={() => setGame('colors')}>
-              <Card word='Colors' image='/card-images/brown.png' />
+              <Card word='Colors' image='/images/colors.png' />
             </div>
           </div>
           <h1>Matching Game</h1>
           <div className='grid grid-cols-4 mt-3'>
             <div onClick={() => setGame('matching-colors')}>
-              <Card word='Amimals' image='/images/Animals.png' />
+              <Card word='Colors' image='/images/colors.png' />
+            </div>
+            <div onClick={() => setGame('matching-vehicles')}>
+              <Card word='Vehicles' image='/images/vehicles.png' />
             </div>
           </div>
         </div>
@@ -61,6 +64,9 @@ export default function Home() {
       {game === 'matching-colors' && (
         <MatchingGame initialDeck={db.getMatchingCards(8, 'colors')} />
       )}
+      {game === 'matching-vehicles' && (
+        <MatchingGame initialDeck={db.getMatchingCards(8, 'vehicles')} />
+      )}
     </>
   );
 }
@@ -72,8 +78,8 @@ interface CardProps {
 
 const Card = ({ word, image }: CardProps) => {
   return (
-    <div className='p-4 bg-slate-700 rounded-md text-center m-4 hover:bg-black hover:cursor-pointer'>
-      <Image src={image} width={200} height={200} alt={word} />
+    <div className='p-4 bg-slate-700 rounded-md text-center m-4 hover:bg-black hover:cursor-pointer relative'>
+      <Image src={image} alt={word} height={480} width={320} />
       <div className='text-white mt-3 text-lg font-extrabold'>{word}</div>
     </div>
   );
