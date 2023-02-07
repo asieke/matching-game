@@ -9,16 +9,14 @@ interface Status {
 
 //create type for props
 type GameProps = {
-  cards: string[];
-  values: string[];
-  className: string;
+  initialDeck: string[];
 };
 
 type SoundMap = { [key: string]: Howl };
 
-export default function Game({ cards, values, className }: GameProps) {
-  console.log('GAME>>>', cards, values, className);
-
+const MatchingGame = ({ initialDeck }: GameProps) => {
+  const cards = initialDeck;
+  console.log(cards);
   //set initial state of animals to an empty array
   const [gameState, setGameState] = useState(true);
   const [status, setStatus] = useState<Status>({});
@@ -36,9 +34,9 @@ export default function Game({ cards, values, className }: GameProps) {
       src: ['/sounds/match.mp3'],
     }),
   };
-  for (let i = 0; i < values.length; i++) {
-    sounds[values[i]] = new Howl({
-      src: [`/card-sounds/${values[i]}.mp3`],
+  for (let i = 0; i < initialDeck.length; i++) {
+    sounds[initialDeck[i]] = new Howl({
+      src: [`/card-sounds/${initialDeck[i]}.mp3`],
     });
   }
 
@@ -124,36 +122,6 @@ export default function Game({ cards, values, className }: GameProps) {
       )}
     </div>
   );
-}
+};
 
-export async function getServerSideProps(context: any) {
-  const { query } = context;
-  const n = (query.n || 16) as number;
-  const category = (query.category || 'letters') as string;
-
-  console.log(category);
-
-  const temp = [];
-  for (let i = 0; i < db[category].length; i++) {
-    temp.push(i);
-  }
-  temp.sort(() => Math.random() - 0.5);
-
-  const values = [];
-  for (let i = 0; i < n / 2; i++) {
-    values.push(db[category][temp[i]]);
-  }
-
-  const columns = n == 16 ? 4 : 6;
-  const className = `mx-auto grid grid-cols-4 gap-3 bg-blue-300 h-full`;
-
-  const cards = [...values, ...values].sort(() => Math.random() - 0.5);
-
-  return {
-    props: {
-      cards,
-      values,
-      className,
-    },
-  };
-}
+export default MatchingGame;

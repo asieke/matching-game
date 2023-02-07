@@ -3,24 +3,36 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import { Howl } from 'howler';
 
+import db from '../db/db';
+
 import FlashCardGameOver from '@/components/FlashCardGameOver';
 
 type FlashProps = {
   //initial deck is an array of objects that have two properties name: [string], and class: [string]
-  initialDeck: { name: string; class: string }[];
+  initialDeck: string[];
+  mainMenu: () => void;
 };
 
 interface Stats {
   [key: string]: number;
 }
 
-const FlashCardGame = ({ initialDeck }: FlashProps) => {
+const FlashCardGame = ({ initialDeck, mainMenu }: FlashProps) => {
+  console.log(initialDeck);
   const [gameInProgress, setGameInProgress] = useState(true);
-  const [deck, setDeck] = useState(initialDeck);
+  const [deck, setDeck] = useState(
+    initialDeck.map((card, i) => {
+      let classString = 'bottom';
+      if (i === initialDeck.length - 1) classString = 'top';
+      if (i === initialDeck.length - 2) classString = 'oneback';
+      if (i === initialDeck.length - 3) classString = 'twoback';
+      return { name: card, class: classString };
+    })
+  );
   const [top, setTop] = useState(initialDeck.length - 1);
   const [stats, setStats] = useState(
     initialDeck.reduce<Stats>((acc, card) => {
-      acc[card.name] = 0;
+      acc[card] = 0;
       return acc;
     }, {})
   );
@@ -75,7 +87,7 @@ const FlashCardGame = ({ initialDeck }: FlashProps) => {
       {gameInProgress ? (
         <>
           {deck.map((card, i) => {
-            const src = `/card-images/${card.name}.png`;
+            const src = db.getImgSrc(card.name);
             const className = card.class + ' card';
             return (
               <div className={className} key={card.name}>
@@ -95,7 +107,7 @@ const FlashCardGame = ({ initialDeck }: FlashProps) => {
           </div>
         </>
       ) : (
-        <FlashCardGameOver stats={stats} />
+        <FlashCardGameOver stats={stats} mainMenu={mainMenu} />
       )}
     </div>
   );

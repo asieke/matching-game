@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
+import db from '../db/db';
 
 //create type for props
 type CardProps = {
@@ -9,22 +10,8 @@ type CardProps = {
 };
 
 const Card = ({ value, flipped, handler }: CardProps) => {
-  console.log('CARD>>>', value, flipped, handler);
-  // const flip = () => {
-  //   setFlipped(!flipped);
-  //   var msg = new SpeechSynthesisUtterance();
-  //   msg.text = value;
-
-  //   const audio = new Audio('/sounds/flip.mp3');
-  //   audio.play();
-  //   //wait for audio to finish playing
-  //   setTimeout(() => {
-  //     window.speechSynthesis.speak(msg);
-  //   }, 200);
-  // };
-
   const isNum = !isNaN(Number(value));
-  const path = isNum ? `images/number-card.png` : `card-images/${value}.png`;
+  const path = db.getImgSrc(value);
 
   return (
     <div onClick={handler} className='w-full h-full'>

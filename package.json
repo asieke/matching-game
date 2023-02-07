@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "generateSound": "tsc db/db.ts && node lib/generateMP3s.js && rm -rf db/db.js"
   },
   "dependencies": {
     "@next/font": "13.1.6",
@@ -15,6 +16,8 @@
     "@types/react": "18.0.27",
     "@types/react-dom": "18.0.10",
     "axios": "^1.2.6",
+    "cloudinary": "^1.33.0",
+    "dotenv": "^16.0.3",
     "eslint": "8.33.0",
     "eslint-config-next": "13.1.6",
     "howler": "^2.2.3",

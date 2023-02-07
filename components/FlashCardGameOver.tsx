@@ -3,6 +3,7 @@ import Image from 'next/image';
 
 type PropTypes = {
   stats: { [key: string]: number };
+  mainMenu: () => void;
 };
 
 const Card = ({ word }: { word: string }) => {
@@ -14,7 +15,7 @@ const Card = ({ word }: { word: string }) => {
   );
 };
 
-const FlashCardGaveOver = ({ stats }: PropTypes) => {
+const FlashCardGaveOver = ({ stats, mainMenu }: PropTypes) => {
   let words = [];
   for (let key in stats) {
     if (stats[key] > 1) {
@@ -25,6 +26,9 @@ const FlashCardGaveOver = ({ stats }: PropTypes) => {
   return (
     <div className='flex flex-col items-center'>
       <div className='text-4xl font-extrabold'>Thanks for Playing!!</div>
+      <button className='text-3xl p-4 rounded bg-blue-500 mt-4' onClick={mainMenu}>
+        Main Menu
+      </button>
       <div className='text-2xl mt-5'>Here are the words you might need a little extra help on</div>
       <div className='grid grid-cols-4 mt-3'>
         {words.map((word, i) => (
