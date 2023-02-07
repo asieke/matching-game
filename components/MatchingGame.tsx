@@ -99,7 +99,7 @@ const MatchingGame = ({ initialDeck, size = '8xl' }: GameProps) => {
   };
 
   return (
-    <div className='w-full bg-slate-200 p-5 h-screen'>
+    <div className='w-full bg-slate-200 p-5 h-[97vh] overscroll-none overflow-hidden'>
       {gameState && (
         <div
           className={`mx-auto grid ${

@@ -4,3 +4,8 @@
 
 @import 'flashcards.css';
 @import 'matching.css';
+
+html,
+body {
+  overflow: hidden;
+}

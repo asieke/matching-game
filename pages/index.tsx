@@ -27,7 +27,7 @@ export default function Home() {
 
           <div className='p-8'>
             <h1>Flash Cards</h1>
-            <div className='grid grid-cols-4 mt-3'>
+            <div className='grid grid-cols-6 mt-3'>
               <Tile label='Uppercase' onClick={() => setGame('uppercase')} />
               <Tile label='Lowercase' onClick={() => setGame('lowercase')} />
               <Tile label='Numbers' onClick={() => setGame('numbers')} />
@@ -38,7 +38,7 @@ export default function Home() {
             </div>
             <h1>Matching Game</h1>
 
-            <div className='grid grid-cols-4 mt-3'>
+            <div className='grid grid-cols-6 mt-3'>
               <Tile label='Uppercase' onClick={() => setGame('m-uppercase')} />
               <Tile label='Lowercase' onClick={() => setGame('m-lowercase')} />
               <Tile label='Numbers' onClick={() => setGame('m-numbers')} />
