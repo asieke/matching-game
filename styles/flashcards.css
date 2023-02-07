@@ -61,5 +61,5 @@
 }
 
 .flashcards .card div {
-  @apply p-4 flex items-center justify-center font-extrabold;
+  @apply pt-0 pb-4 flex items-center justify-center font-extrabold;
 }

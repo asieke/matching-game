@@ -93,7 +93,7 @@ const FlashCardGame = ({ initialDeck, mainMenu }: FlashProps) => {
             return (
               <div className={className} key={card.name}>
                 <Image src={src} width={300} height={300} alt={card.name} />
-                <div className={card.name.length > 12 ? 'text-4xl' : 'text-6xl'}>{card.name}</div>
+                <div className={card.name.length > 12 ? 'text-4xl' : 'text-8xl'}>{card.name}</div>
               </div>
             );
           })}
