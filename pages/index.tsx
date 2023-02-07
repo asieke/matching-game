@@ -123,7 +123,8 @@ const Game = ({ game, setGame, numCards }: GameProps) => {
   }
   if (game === 'm-animals') {
     let deck = db.getMatchingCards(numCards / 2, 'animals');
-    return <MatchingGame initialDeck={deck} />;
+    let size = numCards === 16 ? '6xl' : numCards === 24 ? '5xl' : '4xl';
+    return <MatchingGame initialDeck={deck} size={size} />;
   }
   if (game === 'm-colors') {
     let deck = db.getMatchingCards(numCards / 2, 'colors');

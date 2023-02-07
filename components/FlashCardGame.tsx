@@ -18,7 +18,6 @@ interface Stats {
 }
 
 const FlashCardGame = ({ initialDeck, mainMenu }: FlashProps) => {
-  console.log(initialDeck);
   const [gameInProgress, setGameInProgress] = useState(true);
   const [deck, setDeck] = useState(
     initialDeck.map((card, i) => {

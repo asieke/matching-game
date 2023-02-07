@@ -17,7 +17,6 @@ type SoundMap = { [key: string]: Howl };
 
 const MatchingGame = ({ initialDeck, size = '8xl' }: GameProps) => {
   const cards = initialDeck;
-  console.log(cards);
   //set initial state of animals to an empty array
   const [gameState, setGameState] = useState(true);
   const [status, setStatus] = useState<Status>({});
@@ -36,8 +35,9 @@ const MatchingGame = ({ initialDeck, size = '8xl' }: GameProps) => {
     }),
   };
   for (let i = 0; i < initialDeck.length; i++) {
+    let src = db.getAudioSrc(initialDeck[i]);
     sounds[initialDeck[i]] = new Howl({
-      src: [`/card-sounds/${initialDeck[i]}.mp3`],
+      src: [src],
     });
   }
 
