@@ -92,7 +92,7 @@ const MatchingGame = ({ initialDeck }: GameProps) => {
         setTimeout(() => {
           sounds.flip.play();
           setStatus({ ...status, [i]: 0, [flipped]: 0 });
-        }, 1000);
+        }, 2000);
       }
     }
   };
