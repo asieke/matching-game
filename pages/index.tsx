@@ -34,6 +34,7 @@ export default function Home() {
               <Tile label='Colors' game='colors' setGame={setGame} />
               <Tile label='Vehicles' game='vehicles' setGame={setGame} />
               <Tile label='Sight Words' game='sight-words' setGame={setGame} />
+              <Tile label='Pre-K Sight' game='pre-k-sight-words' setGame={setGame} />
             </div>
 
             <div className='grid grid-cols-6 mt-3'>
@@ -60,7 +61,7 @@ interface TileProps {
 }
 
 const Tile = ({ label, game, setGame }: TileProps) => {
-  const src = '/images/thumb-' + label.toLowerCase().replaceAll(' ', '-') + '.png';
+  const src = '/images/' + label.toLowerCase().replaceAll(' ', '-') + '.png';
   //if game contains m- then it is a matching game
   const bg = game.includes('m-') ? 'bg-slate-700' : 'bg-red-700';
   const type = game.includes('m-') ? 'matching' : 'flashcards';
@@ -112,10 +113,14 @@ const Game = ({ game, setGame, numCards }: GameProps) => {
     let deck = db.getRandom(numCards, 'sight-words');
     return <FlashCardGame initialDeck={deck} mainMenu={() => setGame('menu')} wordsOnly={true} />;
   }
+  if (game === 'pre-k-sight-words') {
+    let deck = db.getRandom(numCards, 'pre-k-sight-words');
+    return <FlashCardGame initialDeck={deck} mainMenu={() => setGame('menu')} wordsOnly={true} />;
+  }
   /* Matching Game */
   if (game === 'm-uppercase') {
     let deck = db.getMatchingCards(numCards / 2, 'uppercase');
-    return <MatchingGame initialDeck={deck} size='8xl' />;
+    return <MatchingGame initialDeck={deck} />;
   }
   if (game === 'm-lowercase') {
     let deck = db.getMatchingCards(numCards / 2, 'lowercase');

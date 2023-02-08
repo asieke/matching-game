@@ -1,20 +1,62 @@
 //create a type for db
 
-type DBType = {
-  data: {
-    name: string;
-    category: string;
-    src: string;
-    audio: string;
-  }[];
-  getImgSrc: (name: string) => string;
-  getAudioSrc: (name: string) => string;
-  getRandom: (num: number, category: string) => string[];
-  getMatchingCards: (num: number, category: string) => string[];
+export type CardType = {
+  name: string;
+  category: string;
+  src: string;
+  audio: string;
 };
 
-const db: DBType = {
+type Database = {
+  data: CardType[];
+  getImgSrc: (name: string) => string;
+  getAudioSrc: (name: string) => string;
+  getRandom: (num: number, category: string) => CardType[];
+  getMatchingCards: (num: number, category: string) => CardType[];
+};
+
+const db: Database = {
   data: [
+    { name: 'a', category: 'pre-k-sight-words', src: 'sight-word', audio: 'a' },
+    { name: 'and', category: 'pre-k-sight-words', src: 'sight-word', audio: 'and' },
+    { name: 'away', category: 'pre-k-sight-words', src: 'sight-word', audio: 'away' },
+    { name: 'big', category: 'pre-k-sight-words', src: 'sight-word', audio: 'big' },
+    { name: 'blue', category: 'pre-k-sight-words', src: 'sight-word', audio: 'blue' },
+    { name: 'can', category: 'pre-k-sight-words', src: 'sight-word', audio: 'can' },
+    { name: 'come', category: 'pre-k-sight-words', src: 'sight-word', audio: 'come' },
+    { name: 'down', category: 'pre-k-sight-words', src: 'sight-word', audio: 'down' },
+    { name: 'find', category: 'pre-k-sight-words', src: 'sight-word', audio: 'find' },
+    { name: 'for', category: 'pre-k-sight-words', src: 'sight-word', audio: 'for' },
+    { name: 'funny', category: 'pre-k-sight-words', src: 'sight-word', audio: 'funny' },
+    { name: 'go', category: 'pre-k-sight-words', src: 'sight-word', audio: 'go' },
+    { name: 'help', category: 'pre-k-sight-words', src: 'sight-word', audio: 'help' },
+    { name: 'here', category: 'pre-k-sight-words', src: 'sight-word', audio: 'here' },
+    { name: 'I', category: 'pre-k-sight-words', src: 'sight-word', audio: 'I' },
+    { name: 'in', category: 'pre-k-sight-words', src: 'sight-word', audio: 'in' },
+    { name: 'is', category: 'pre-k-sight-words', src: 'sight-word', audio: 'is' },
+    { name: 'it', category: 'pre-k-sight-words', src: 'sight-word', audio: 'it' },
+    { name: 'jump', category: 'pre-k-sight-words', src: 'sight-word', audio: 'jump' },
+    { name: 'little', category: 'pre-k-sight-words', src: 'sight-word', audio: 'little' },
+    { name: 'look', category: 'pre-k-sight-words', src: 'sight-word', audio: 'look' },
+    { name: 'make', category: 'pre-k-sight-words', src: 'sight-word', audio: 'make' },
+    { name: 'me', category: 'pre-k-sight-words', src: 'sight-word', audio: 'me' },
+    { name: 'my', category: 'pre-k-sight-words', src: 'sight-word', audio: 'my' },
+    { name: 'not', category: 'pre-k-sight-words', src: 'sight-word', audio: 'not' },
+    { name: 'one', category: 'pre-k-sight-words', src: 'sight-word', audio: 'one' },
+    { name: 'play', category: 'pre-k-sight-words', src: 'sight-word', audio: 'play' },
+    { name: 'red', category: 'pre-k-sight-words', src: 'sight-word', audio: 'red' },
+    { name: 'run', category: 'pre-k-sight-words', src: 'sight-word', audio: 'run' },
+    { name: 'said', category: 'pre-k-sight-words', src: 'sight-word', audio: 'said' },
+    { name: 'see', category: 'pre-k-sight-words', src: 'sight-word', audio: 'see' },
+    { name: 'the', category: 'pre-k-sight-words', src: 'sight-word', audio: 'the' },
+    { name: 'three', category: 'pre-k-sight-words', src: 'sight-word', audio: 'three' },
+    { name: 'to', category: 'pre-k-sight-words', src: 'sight-word', audio: 'to' },
+    { name: 'two', category: 'pre-k-sight-words', src: 'sight-word', audio: 'two' },
+    { name: 'up', category: 'pre-k-sight-words', src: 'sight-word', audio: 'up' },
+    { name: 'we', category: 'pre-k-sight-words', src: 'sight-word', audio: 'we' },
+    { name: 'where', category: 'pre-k-sight-words', src: 'sight-word', audio: 'where' },
+    { name: 'yellow', category: 'pre-k-sight-words', src: 'sight-word', audio: 'yellow' },
+    { name: 'you', category: 'pre-k-sight-words', src: 'sight-word', audio: 'you' },
     { name: 'the', category: 'sight-words', src: 'sight-words', audio: 'the' },
     { name: 'of', category: 'sight-words', src: 'sight-words', audio: 'of' },
     { name: 'and', category: 'sight-words', src: 'sight-words', audio: 'and' },
@@ -232,7 +274,7 @@ const db: DBType = {
 
     const out = [];
     for (let i = 0; i < n; i++) {
-      out.push(items[randArray[i]].name);
+      out.push(items[randArray[i]]);
     }
     return out;
   },

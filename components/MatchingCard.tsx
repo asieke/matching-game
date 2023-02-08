@@ -8,12 +8,13 @@ type CardProps = {
   flipped: boolean;
   handler: () => void;
   columns: number;
+  img: string;
   //optional prop hide image
 };
 
-const FlashCard = ({ value, flipped, handler, columns }: CardProps) => {
+const FlashCard = ({ value, flipped, handler, columns, img }: CardProps) => {
   const isNum = !isNaN(Number(value));
-  const path = db.getImgSrc(value);
+  const path = '/card-images/' + img + '.png';
 
   let size = 'text-[120px]';
   if (columns === 4) {

@@ -1,9 +1,10 @@
 import MatchingCard from './MatchingCard';
 import React, { useState } from 'react';
 import { Howl } from 'howler';
-import db from '../db/db';
+import db, { CardType } from '../db/db';
 
 import MatchingGameOver from './MatchingGameOver';
+import getSounds from '../utils/sounds';
 
 interface Status {
   [key: number]: number;
@@ -11,13 +12,12 @@ interface Status {
 
 //create type for props
 type GameProps = {
-  initialDeck: string[];
-  size?: string;
+  initialDeck: CardType[];
 };
 
 type SoundMap = { [key: string]: Howl };
 
-const MatchingGame = ({ initialDeck, size = '8xl' }: GameProps) => {
+const MatchingGame = ({ initialDeck }: GameProps) => {
   const cards = initialDeck;
   //set initial state of animals to an empty array
   const [gameState, setGameState] = useState(true);
@@ -27,21 +27,23 @@ const MatchingGame = ({ initialDeck, size = '8xl' }: GameProps) => {
   const [endTime, setEndTime] = useState(0);
   const [clicks, setClicks] = useState(0);
 
-  const sounds: SoundMap = {
-    flip: new Howl({
-      src: ['/sounds/flip.mp3'],
-      volume: 0.5,
-    }),
-    match: new Howl({
-      src: ['/sounds/match.mp3'],
-    }),
-  };
-  for (let i = 0; i < initialDeck.length; i++) {
-    let src = db.getAudioSrc(initialDeck[i]);
-    sounds[initialDeck[i]] = new Howl({
-      src: [src],
-    });
-  }
+  // const sounds: SoundMap = {
+  //   flip: new Howl({
+  //     src: ['/sounds/flip.mp3'],
+  //     volume: 0.5,
+  //   }),
+  //   match: new Howl({
+  //     src: ['/sounds/match.mp3'],
+  //   }),
+  // };
+  // for (let i = 0; i < initialDeck.length; i++) {
+  //   let src = '/card-sounds/' + initialDeck[i].audio + '.mp3';
+  //   sounds[initialDeck[i].name] = new Howl({
+  //     src: [src],
+  //   });
+  // }
+
+  const sounds = getSounds(initialDeck);
 
   const handleClick = (i: number) => {
     if (startTime === 0) {
@@ -62,7 +64,7 @@ const MatchingGame = ({ initialDeck, size = '8xl' }: GameProps) => {
     setClicks(clicks + 1);
 
     sounds.flip.play();
-    sounds[cards[i]].play();
+    sounds[cards[i].name].play();
 
     // iterate through statuses and find the value where status is 1
     let flipped: number = -1;
@@ -111,7 +113,8 @@ const MatchingGame = ({ initialDeck, size = '8xl' }: GameProps) => {
           {cards.map((x, i) => (
             <div key={i}>
               <MatchingCard
-                value={x}
+                value={x.name}
+                img={x.src}
                 flipped={!!status[i]}
                 handler={() => handleClick(i)}
                 columns={cards.length <= 16 ? 4 : 6}

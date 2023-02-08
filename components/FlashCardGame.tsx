@@ -3,13 +3,14 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import { Howl } from 'howler';
 
-import db from '../db/db';
+import db, { CardType } from '../db/db';
+import getSounds from '../utils/sounds';
 
 import FlashCardGameOver from '@/components/FlashCardGameOver';
 
 type FlashProps = {
   //initial deck is an array of objects that have two properties name: [string], and class: [string]
-  initialDeck: string[];
+  initialDeck: CardType[];
   mainMenu: () => void;
   wordsOnly?: boolean;
 };
@@ -26,24 +27,26 @@ const FlashCardGame = ({ initialDeck, mainMenu, wordsOnly = false }: FlashProps)
       if (i === initialDeck.length - 1) classString = 'top';
       if (i === initialDeck.length - 2) classString = 'oneback';
       if (i === initialDeck.length - 3) classString = 'twoback';
-      return { name: card, class: classString };
+      return { ...card, class: classString };
     })
   );
   const [top, setTop] = useState(initialDeck.length - 1);
   const [stats, setStats] = useState(
     initialDeck.reduce<Stats>((acc, card) => {
-      acc[card] = 0;
+      acc[card.name] = 0;
       return acc;
     }, {})
   );
-  const flip = new Howl({
-    src: ['/sounds/flip.mp3'],
-    volume: 0.5,
-  });
+
+  const sounds = getSounds(initialDeck);
+
+  const handleCardClick = (card: CardType) => {
+    sounds[card.name].play();
+  };
 
   const handleClick = (accepted: boolean) => {
     if (top < 0) return;
-    flip.play();
+    sounds.flip.play();
     let newDeck = [...deck];
     setStats({ ...stats, [deck[top].name]: stats[deck[top].name] + 1 });
     if (accepted) {
@@ -63,7 +66,7 @@ const FlashCardGame = ({ initialDeck, mainMenu, wordsOnly = false }: FlashProps)
         for (let i = 0; i < deck.length; i++) {
           if (deck[i].class === 'moved-incorrect') {
             temp.push({
-              name: deck[i].name,
+              ...deck[i],
               class: 'bottom',
             });
           }
@@ -88,10 +91,10 @@ const FlashCardGame = ({ initialDeck, mainMenu, wordsOnly = false }: FlashProps)
       {gameInProgress ? (
         <>
           {deck.map((card, i) => {
-            const src = db.getImgSrc(card.name);
+            const src = '/card-images/' + card.src + '.png';
             const className = card.class + ' card';
             return (
-              <div className={className} key={card.name}>
+              <div className={className} key={card.name} onClick={() => handleCardClick(card)}>
                 {!wordsOnly && (
                   <>
                     <Image src={src} width={240} height={240} alt={card.name} priority />
