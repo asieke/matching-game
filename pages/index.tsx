@@ -26,26 +26,24 @@ export default function Home() {
           </div>
 
           <div className='p-8'>
-            <h1>Flash Cards</h1>
-            <div className='grid grid-cols-6 mt-3'>
-              <Tile label='Uppercase' onClick={() => setGame('uppercase')} />
-              <Tile label='Lowercase' onClick={() => setGame('lowercase')} />
-              <Tile label='Numbers' onClick={() => setGame('numbers')} />
-              <Tile label='Animals' onClick={() => setGame('animals')} />
-              <Tile label='Colors' onClick={() => setGame('colors')} />
-              <Tile label='Vehicles' onClick={() => setGame('vehicles')} />
-              <Tile label='Sight Words' onClick={() => setGame('sight-words')} />
+            <div className='grid grid-cols-6 mt-8'>
+              <Tile label='Uppercase' game='uppercase' setGame={setGame} />
+              <Tile label='Lowercase' game='lowercase' setGame={setGame} />
+              <Tile label='Numbers' game='numbers' setGame={setGame} />
+              <Tile label='Animals' game='animals' setGame={setGame} />
+              <Tile label='Colors' game='colors' setGame={setGame} />
+              <Tile label='Vehicles' game='vehicles' setGame={setGame} />
+              <Tile label='Sight Words' game='sight-words' setGame={setGame} />
             </div>
-            <h1>Matching Game</h1>
 
             <div className='grid grid-cols-6 mt-3'>
-              <Tile label='Uppercase' onClick={() => setGame('m-uppercase')} />
-              <Tile label='Lowercase' onClick={() => setGame('m-lowercase')} />
-              <Tile label='Numbers' onClick={() => setGame('m-numbers')} />
-              <Tile label='Animals' onClick={() => setGame('m-animals')} />
-              <Tile label='Colors' onClick={() => setGame('m-colors')} />
-              <Tile label='Vehicles' onClick={() => setGame('m-vehicles')} />
-              <Tile label='Sight Words' onClick={() => setGame('m-sight-words')} />
+              <Tile label='Uppercase' game='m-uppercase' setGame={setGame} />
+              <Tile label='Lowercase' game='m-lowercase' setGame={setGame} />
+              <Tile label='Numbers' game='m-numbers' setGame={setGame} />
+              <Tile label='Animals' game='m-animals' setGame={setGame} />
+              <Tile label='Colors' game='m-colors' setGame={setGame} />
+              <Tile label='Vehicles' game='m-vehicles' setGame={setGame} />
+              <Tile label='Sight Words' game='m-sight-words' setGame={setGame} />
             </div>
           </div>
         </>
@@ -57,18 +55,24 @@ export default function Home() {
 
 interface TileProps {
   label: string;
-  onClick: () => void;
+  game: string;
+  setGame: (game: string) => void;
 }
 
-const Tile = ({ label, onClick }: TileProps) => {
+const Tile = ({ label, game, setGame }: TileProps) => {
   const src = '/images/thumb-' + label.toLowerCase().replaceAll(' ', '-') + '.png';
+  //if game contains m- then it is a matching game
+  const bg = game.includes('m-') ? 'bg-slate-700' : 'bg-red-700';
+  const type = game.includes('m-') ? 'matching' : 'flashcards';
+
   return (
     <div
-      onClick={onClick}
-      className='p-4 bg-slate-700 rounded-md text-center m-4 hover:bg-black hover:cursor-pointer relative'
+      onClick={() => setGame(game)}
+      className={`p-4 ${bg} rounded-md text-center m-4 hover:bg-black hover:cursor-pointer relative`}
     >
       <Image src={src} alt={label} height={480} width={320} priority />
-      <div className='text-white mt-3 text-base font-extrabold'>{label}</div>
+      <p className='text-white mt-2 text-base font-extrabold'>{label}</p>
+      <p className='text-white text-sm'>{type}</p>
     </div>
   );
 };
@@ -106,7 +110,7 @@ const Game = ({ game, setGame, numCards }: GameProps) => {
   }
   if (game === 'sight-words') {
     let deck = db.getRandom(numCards, 'sight-words');
-    return <FlashCardGame initialDeck={deck} mainMenu={() => setGame('menu')} />;
+    return <FlashCardGame initialDeck={deck} mainMenu={() => setGame('menu')} wordsOnly={true} />;
   }
   /* Matching Game */
   if (game === 'm-uppercase') {

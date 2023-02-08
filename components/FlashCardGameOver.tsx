@@ -32,7 +32,7 @@ const FlashCardGaveOver = ({ stats, mainMenu }: PropTypes) => {
         Main Menu
       </button>
       <div className='text-2xl mt-5'>Here are the words you might need a little extra help on</div>
-      <div className='grid grid-cols-4 mt-3'>
+      <div className='grid grid-cols-6 mt-3'>
         {words.map((word, i) => (
           <Card key={i} word={word} />
         ))}

@@ -11,13 +11,14 @@ type FlashProps = {
   //initial deck is an array of objects that have two properties name: [string], and class: [string]
   initialDeck: string[];
   mainMenu: () => void;
+  wordsOnly?: boolean;
 };
 
 interface Stats {
   [key: string]: number;
 }
 
-const FlashCardGame = ({ initialDeck, mainMenu }: FlashProps) => {
+const FlashCardGame = ({ initialDeck, mainMenu, wordsOnly = false }: FlashProps) => {
   const [gameInProgress, setGameInProgress] = useState(true);
   const [deck, setDeck] = useState(
     initialDeck.map((card, i) => {
@@ -91,18 +92,29 @@ const FlashCardGame = ({ initialDeck, mainMenu }: FlashProps) => {
             const className = card.class + ' card';
             return (
               <div className={className} key={card.name}>
-                <Image src={src} width={300} height={300} alt={card.name} priority />
-                <div className={card.name.length > 12 ? 'text-4xl' : 'text-8xl'}>{card.name}</div>
+                {!wordsOnly && (
+                  <>
+                    <Image src={src} width={240} height={240} alt={card.name} priority />
+                    <div className={`h-32 ${card.name.length > 12 ? 'text-4xl' : 'text-8xl'}`}>
+                      {card.name}
+                    </div>
+                  </>
+                )}
+                {wordsOnly && (
+                  <div className={`h-96 ${card.name.length > 12 ? 'text-4xl' : 'text-8xl'}`}>
+                    {card.name}
+                  </div>
+                )}
               </div>
             );
           })}
 
-          <div className='controls mt-[480px]'>
+          <div className='controls mt-[560px]'>
             <button className='accept' onClick={() => handleClick(true)}>
-              <span className='text-hidden'>Accept</span>
+              <span className='text-hidden'>👍 Yes!!</span>
             </button>
             <button className='reject' onClick={() => handleClick(false)}>
-              <span className='text-hidden'>Reject</span>
+              <span className='text-hidden'>👎 Not yet...</span>
             </button>
           </div>
         </>
