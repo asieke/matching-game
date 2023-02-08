@@ -1,7 +1,9 @@
-import Card from '../components/Card';
+import MatchingCard from './MatchingCard';
 import React, { useState } from 'react';
 import { Howl } from 'howler';
 import db from '../db/db';
+
+import MatchingGameOver from './MatchingGameOver';
 
 interface Status {
   [key: number]: number;
@@ -108,7 +110,7 @@ const MatchingGame = ({ initialDeck, size = '8xl' }: GameProps) => {
         >
           {cards.map((x, i) => (
             <div key={i}>
-              <Card
+              <MatchingCard
                 value={x}
                 flipped={!!status[i]}
                 handler={() => handleClick(i)}
@@ -118,14 +120,7 @@ const MatchingGame = ({ initialDeck, size = '8xl' }: GameProps) => {
           ))}
         </div>
       )}
-      {!gameState && (
-        <div className='flex flex-col items-center'>
-          <h1 className='text-4xl text-center font-bold'>Game Over</h1>
-          <h3>{matches}</h3>
-          <h3>{clicks}</h3>
-          <h3>{endTime - startTime}</h3>
-        </div>
-      )}
+      {!gameState && <MatchingGameOver stats={{ startTime, endTime, matches, clicks }} />}
     </div>
   );
 };

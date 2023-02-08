@@ -61,14 +61,14 @@ interface TileProps {
 }
 
 const Tile = ({ label, onClick }: TileProps) => {
-  const src = '/images/' + label.toLowerCase().replaceAll(' ', '-') + '.png';
+  const src = '/images/thumb-' + label.toLowerCase().replaceAll(' ', '-') + '.png';
   return (
     <div
       onClick={onClick}
       className='p-4 bg-slate-700 rounded-md text-center m-4 hover:bg-black hover:cursor-pointer relative'
     >
-      <Image src={src} alt={label} height={480} width={320} />
-      <div className='text-white mt-3 text-lg font-extrabold'>{label}</div>
+      <Image src={src} alt={label} height={480} width={320} priority />
+      <div className='text-white mt-3 text-base font-extrabold'>{label}</div>
     </div>
   );
 };

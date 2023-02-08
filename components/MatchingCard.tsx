@@ -11,7 +11,7 @@ type CardProps = {
   //optional prop hide image
 };
 
-const Card = ({ value, flipped, handler, columns }: CardProps) => {
+const FlashCard = ({ value, flipped, handler, columns }: CardProps) => {
   const isNum = !isNaN(Number(value));
   const path = db.getImgSrc(value);
 
@@ -29,10 +29,9 @@ const Card = ({ value, flipped, handler, columns }: CardProps) => {
   return (
     <div onClick={handler} className='w-full h-full'>
       <div className={(flipped ? ' flip-clicked' : '') + ' flip-content w-full h-full'}>
-        <div
-          className='flip-front bg-center bg-cover shadow-xl rounded-lg w-full h-full'
-          style={{ backgroundImage: `url('images/pattern.png')` }}
-        ></div>
+        <div className='flip-front bg-center bg-cover shadow-xl rounded-lg w-full h-full'>
+          <Image priority src={'/images/pattern.png'} fill alt={'pattern'} />
+        </div>
         <div
           className='flip-back bg-center bg-cover rounded-lg shadow-xl w-full h-full'
           style={{ backgroundImage: `url('${path}')` }}
@@ -48,4 +47,4 @@ const Card = ({ value, flipped, handler, columns }: CardProps) => {
   );
 };
 
-export default Card;
+export default FlashCard;

@@ -8,45 +8,45 @@
 
 .flashcards .card {
   @apply bg-slate-700 text-white rounded-xl w-[480px] absolute shadow-md;
+  transition-timing-function: cubic-bezier(0, 0, 1, 1);
 }
 
 .flashcards .moved-correct {
-  z-index: 4;
-  transition-delay: 0.1s;
+  z-index: 50;
   transform: translateX(1000px) rotate3d(1, 1, 1, 10000deg);
-  opacity: 0;
-  transition-property: transform, opacity;
-  transition-duration: 1s;
+  transition-property: transform;
+  transition-duration: 500ms;
 }
 
 .flashcards .moved-incorrect {
-  z-index: 4;
-  transition-delay: 0.1s;
+  z-index: 50;
   transform: translateX(-1000px) rotate3d(1, 1, 1, 10000deg);
-  opacity: 0;
-  transition-property: transform, opacity;
-  transition-duration: 1s;
+  transition-property: transform;
+  transition-duration: 500ms;
 }
 
 .flashcards .top {
   z-index: 3;
   transform: translateY(0px) translateX(0px);
   transition-property: transform;
-  transition-duration: 1s;
+  transition-duration: 200ms;
+  transition-delay: 500ms;
 }
 
 .flashcards .oneback {
   z-index: 2;
   transform: translateY(10px) translateX(10px);
   transition-property: transform;
-  transition-duration: 1s;
+  transition-duration: 200ms;
+  transition-delay: 700ms;
 }
 
 .flashcards .twoback {
   z-index: 1;
   transform: translateY(20px) translateX(20px);
   transition-property: transform;
-  transition-duration: 1s;
+  transition-duration: 200ms;
+  transition-delay: 900ms;
 }
 
 .flashcards .bottom {
@@ -54,6 +54,7 @@
   transform: translateY(20px) translateX(20px);
   transition-property: transform;
   transition-duration: 1s;
+  opacity: 0;
 }
 
 .flashcards .card img {
