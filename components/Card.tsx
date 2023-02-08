@@ -16,9 +16,15 @@ const Card = ({ value, flipped, handler, columns }: CardProps) => {
   const path = db.getImgSrc(value);
 
   let size = 'text-[120px]';
-  if (value.length > 2) size = 'text-[80px]';
-  if (value.length >= 6) size = 'text-[60px]';
-  if (value.length >= 8) size = 'text-[50px]';
+  if (columns === 4) {
+    if (value.length > 2) size = 'text-[80px]';
+    if (value.length >= 6) size = 'text-[60px]';
+    if (value.length >= 8) size = 'text-[50px]';
+  } else {
+    if (value.length > 2) size = 'text-[50px]';
+    if (value.length >= 5) size = 'text-[40px]';
+    if (value.length >= 8) size = 'text-[30px]';
+  }
 
   return (
     <div onClick={handler} className='w-full h-full'>
