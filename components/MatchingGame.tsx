@@ -99,16 +99,21 @@ const MatchingGame = ({ initialDeck, size = '8xl' }: GameProps) => {
   };
 
   return (
-    <div className='w-full bg-slate-200 p-5 h-[97vh] overscroll-none overflow-hidden'>
+    <div className='w-full bg-slate-200 p-8 h-[100vh] overscroll-none overflow-hidden'>
       {gameState && (
         <div
           className={`mx-auto grid ${
             cards.length <= 16 ? 'grid-cols-4' : 'grid-cols-6'
-          } gap-3 h-full`}
+          } gap-5 h-full`}
         >
           {cards.map((x, i) => (
             <div key={i}>
-              <Card value={x} flipped={!!status[i]} handler={() => handleClick(i)} size={size} />
+              <Card
+                value={x}
+                flipped={!!status[i]}
+                handler={() => handleClick(i)}
+                columns={cards.length <= 16 ? 4 : 6}
+              />
             </div>
           ))}
         </div>

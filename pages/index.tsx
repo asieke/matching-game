@@ -123,8 +123,7 @@ const Game = ({ game, setGame, numCards }: GameProps) => {
   }
   if (game === 'm-animals') {
     let deck = db.getMatchingCards(numCards / 2, 'animals');
-    let size = numCards === 16 ? '6xl' : numCards === 24 ? '5xl' : '4xl';
-    return <MatchingGame initialDeck={deck} size={size} />;
+    return <MatchingGame initialDeck={deck} />;
   }
   if (game === 'm-colors') {
     let deck = db.getMatchingCards(numCards / 2, 'colors');
@@ -132,8 +131,7 @@ const Game = ({ game, setGame, numCards }: GameProps) => {
   }
   if (game === 'm-vehicles') {
     let deck = db.getMatchingCards(numCards / 2, 'vehicles');
-    let size = numCards === 16 ? '6xl' : numCards === 24 ? '5xl' : '4xl';
-    return <MatchingGame initialDeck={deck} size={size} />;
+    return <MatchingGame initialDeck={deck} />;
   }
   if (game === 'm-sight-words') {
     let deck = db.getMatchingCards(numCards / 2, 'sight-words');
