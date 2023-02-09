@@ -89,6 +89,14 @@ const db: Database = {
       wordsOnly: false,
     },
     { label: 'Numbers', category: 'numbers', type: 'matching', img: 'numbers', wordsOnly: false },
+    // Word Games
+    {
+      label: 'Uppercase',
+      category: 'uppercase',
+      type: 'guessing',
+      img: 'uppercase',
+      wordsOnly: false,
+    },
   ],
   data: [
     { name: 'a', category: 'pre-k-sight-words', src: 'sight-words', audio: 'a' },

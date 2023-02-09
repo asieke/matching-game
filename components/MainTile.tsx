@@ -9,12 +9,19 @@ interface TileProps {
 const Tile = ({ game, onClick }: TileProps) => {
   const src = '/images/' + game.img + '.png';
   //if game contains m- then it is a matching game
-  const bg = game.type === 'flashcards' ? 'bg-slate-700' : 'bg-red-700';
+
+  const bg: { [key: string]: string } = {
+    flashcards: 'bg-slate-800',
+    matching: 'bg-red-800',
+    guessing: 'bg-green-800',
+  };
 
   return (
     <div
       onClick={onClick}
-      className={`p-4 ${bg} rounded-md text-center m-4 hover:bg-black hover:cursor-pointer relative`}
+      className={`p-4 ${
+        bg[game.type]
+      } rounded-md text-center m-4 hover:bg-black hover:cursor-pointer relative`}
     >
       <Image src={src} alt={game.label} height={480} width={320} priority />
       <p className='text-white mt-2 text-base font-extrabold'>{game.label}</p>
