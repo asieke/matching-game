@@ -3,7 +3,7 @@
 }
 
 .flashcards button.reject {
-  @apply bg-red-900 hover:bg-red-700 shadow-lg text-white text-4xl py-10 w-64 rounded-md m-2 border-0 mt-8;
+  @apply bg-blue-800 hover:bg-blue-700 shadow-lg text-white text-4xl py-10 w-64 rounded-md m-2 border-0 mt-8;
 }
 
 .flashcards .card {

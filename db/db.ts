@@ -7,56 +7,130 @@ export type CardType = {
   audio: string;
 };
 
+export type GameType = {
+  category: string;
+  label: string;
+  img: string;
+  type: string;
+  wordsOnly: boolean;
+};
+
 type Database = {
   data: CardType[];
+  games: GameType[];
   getImgSrc: (name: string) => string;
   getAudioSrc: (name: string) => string;
   getRandom: (num: number, category: string) => CardType[];
-  getMatchingCards: (num: number, category: string) => CardType[];
+  getRandomMatching: (num: number, category: string) => CardType[];
 };
 
 const db: Database = {
+  games: [
+    {
+      label: 'Pre-K Sight Words',
+      category: 'pre-k-sight-words',
+      type: 'flashcards',
+      img: 'pre-k-sight',
+      wordsOnly: false,
+    },
+    {
+      label: 'Sight Words',
+      category: 'sight-words',
+      type: 'flashcards',
+      img: 'sight-words',
+      wordsOnly: false,
+    },
+    { label: 'Animals', category: 'animals', type: 'flashcards', img: 'animals', wordsOnly: false },
+    { label: 'Colors', category: 'colors', type: 'flashcards', img: 'colors', wordsOnly: false },
+    {
+      label: 'Uppercase',
+      category: 'uppercase',
+      type: 'flashcards',
+      img: 'uppercase',
+      wordsOnly: false,
+    },
+    {
+      label: 'Lowercase',
+      category: 'lowercase',
+      type: 'flashcards',
+      img: 'lowercase',
+      wordsOnly: false,
+    },
+    { label: 'Numbers', category: 'numbers', type: 'flashcards', img: 'numbers', wordsOnly: false },
+    //Matching Games
+    {
+      label: 'Pre-K Sight Words',
+      category: 'pre-k-sight-words',
+      type: 'matching',
+      img: 'pre-k-sight',
+      wordsOnly: false,
+    },
+    {
+      label: 'Sight Words',
+      category: 'sight-words',
+      type: 'matching',
+      img: 'sight-words',
+      wordsOnly: false,
+    },
+    { label: 'Animals', category: 'animals', type: 'matching', img: 'animals', wordsOnly: false },
+    { label: 'Colors', category: 'colors', type: 'matching', img: 'colors', wordsOnly: false },
+    {
+      label: 'Uppercase',
+      category: 'uppercase',
+      type: 'matching',
+      img: 'uppercase',
+      wordsOnly: false,
+    },
+    {
+      label: 'Lowercase',
+      category: 'lowercase',
+      type: 'matching',
+      img: 'lowercase',
+      wordsOnly: false,
+    },
+    { label: 'Numbers', category: 'numbers', type: 'matching', img: 'numbers', wordsOnly: false },
+  ],
   data: [
-    { name: 'a', category: 'pre-k-sight-words', src: 'sight-word', audio: 'a' },
-    { name: 'and', category: 'pre-k-sight-words', src: 'sight-word', audio: 'and' },
-    { name: 'away', category: 'pre-k-sight-words', src: 'sight-word', audio: 'away' },
-    { name: 'big', category: 'pre-k-sight-words', src: 'sight-word', audio: 'big' },
-    { name: 'blue', category: 'pre-k-sight-words', src: 'sight-word', audio: 'blue' },
-    { name: 'can', category: 'pre-k-sight-words', src: 'sight-word', audio: 'can' },
-    { name: 'come', category: 'pre-k-sight-words', src: 'sight-word', audio: 'come' },
-    { name: 'down', category: 'pre-k-sight-words', src: 'sight-word', audio: 'down' },
-    { name: 'find', category: 'pre-k-sight-words', src: 'sight-word', audio: 'find' },
-    { name: 'for', category: 'pre-k-sight-words', src: 'sight-word', audio: 'for' },
-    { name: 'funny', category: 'pre-k-sight-words', src: 'sight-word', audio: 'funny' },
-    { name: 'go', category: 'pre-k-sight-words', src: 'sight-word', audio: 'go' },
-    { name: 'help', category: 'pre-k-sight-words', src: 'sight-word', audio: 'help' },
-    { name: 'here', category: 'pre-k-sight-words', src: 'sight-word', audio: 'here' },
-    { name: 'I', category: 'pre-k-sight-words', src: 'sight-word', audio: 'I' },
-    { name: 'in', category: 'pre-k-sight-words', src: 'sight-word', audio: 'in' },
-    { name: 'is', category: 'pre-k-sight-words', src: 'sight-word', audio: 'is' },
-    { name: 'it', category: 'pre-k-sight-words', src: 'sight-word', audio: 'it' },
-    { name: 'jump', category: 'pre-k-sight-words', src: 'sight-word', audio: 'jump' },
-    { name: 'little', category: 'pre-k-sight-words', src: 'sight-word', audio: 'little' },
-    { name: 'look', category: 'pre-k-sight-words', src: 'sight-word', audio: 'look' },
-    { name: 'make', category: 'pre-k-sight-words', src: 'sight-word', audio: 'make' },
-    { name: 'me', category: 'pre-k-sight-words', src: 'sight-word', audio: 'me' },
-    { name: 'my', category: 'pre-k-sight-words', src: 'sight-word', audio: 'my' },
-    { name: 'not', category: 'pre-k-sight-words', src: 'sight-word', audio: 'not' },
-    { name: 'one', category: 'pre-k-sight-words', src: 'sight-word', audio: 'one' },
-    { name: 'play', category: 'pre-k-sight-words', src: 'sight-word', audio: 'play' },
-    { name: 'red', category: 'pre-k-sight-words', src: 'sight-word', audio: 'red' },
-    { name: 'run', category: 'pre-k-sight-words', src: 'sight-word', audio: 'run' },
-    { name: 'said', category: 'pre-k-sight-words', src: 'sight-word', audio: 'said' },
-    { name: 'see', category: 'pre-k-sight-words', src: 'sight-word', audio: 'see' },
-    { name: 'the', category: 'pre-k-sight-words', src: 'sight-word', audio: 'the' },
-    { name: 'three', category: 'pre-k-sight-words', src: 'sight-word', audio: 'three' },
-    { name: 'to', category: 'pre-k-sight-words', src: 'sight-word', audio: 'to' },
-    { name: 'two', category: 'pre-k-sight-words', src: 'sight-word', audio: 'two' },
-    { name: 'up', category: 'pre-k-sight-words', src: 'sight-word', audio: 'up' },
-    { name: 'we', category: 'pre-k-sight-words', src: 'sight-word', audio: 'we' },
-    { name: 'where', category: 'pre-k-sight-words', src: 'sight-word', audio: 'where' },
-    { name: 'yellow', category: 'pre-k-sight-words', src: 'sight-word', audio: 'yellow' },
-    { name: 'you', category: 'pre-k-sight-words', src: 'sight-word', audio: 'you' },
+    { name: 'a', category: 'pre-k-sight-words', src: 'sight-words', audio: 'a' },
+    { name: 'and', category: 'pre-k-sight-words', src: 'sight-words', audio: 'and' },
+    { name: 'away', category: 'pre-k-sight-words', src: 'sight-words', audio: 'away' },
+    { name: 'big', category: 'pre-k-sight-words', src: 'sight-words', audio: 'big' },
+    { name: 'blue', category: 'pre-k-sight-words', src: 'sight-words', audio: 'blue' },
+    { name: 'can', category: 'pre-k-sight-words', src: 'sight-words', audio: 'can' },
+    { name: 'come', category: 'pre-k-sight-words', src: 'sight-words', audio: 'come' },
+    { name: 'down', category: 'pre-k-sight-words', src: 'sight-words', audio: 'down' },
+    { name: 'find', category: 'pre-k-sight-words', src: 'sight-words', audio: 'find' },
+    { name: 'for', category: 'pre-k-sight-words', src: 'sight-words', audio: 'for' },
+    { name: 'funny', category: 'pre-k-sight-words', src: 'sight-words', audio: 'funny' },
+    { name: 'go', category: 'pre-k-sight-words', src: 'sight-words', audio: 'go' },
+    { name: 'help', category: 'pre-k-sight-words', src: 'sight-words', audio: 'help' },
+    { name: 'here', category: 'pre-k-sight-words', src: 'sight-words', audio: 'here' },
+    { name: 'I', category: 'pre-k-sight-words', src: 'sight-words', audio: 'I' },
+    { name: 'in', category: 'pre-k-sight-words', src: 'sight-words', audio: 'in' },
+    { name: 'is', category: 'pre-k-sight-words', src: 'sight-words', audio: 'is' },
+    { name: 'it', category: 'pre-k-sight-words', src: 'sight-words', audio: 'it' },
+    { name: 'jump', category: 'pre-k-sight-words', src: 'sight-words', audio: 'jump' },
+    { name: 'little', category: 'pre-k-sight-words', src: 'sight-words', audio: 'little' },
+    { name: 'look', category: 'pre-k-sight-words', src: 'sight-words', audio: 'look' },
+    { name: 'make', category: 'pre-k-sight-words', src: 'sight-words', audio: 'make' },
+    { name: 'me', category: 'pre-k-sight-words', src: 'sight-words', audio: 'me' },
+    { name: 'my', category: 'pre-k-sight-words', src: 'sight-words', audio: 'my' },
+    { name: 'not', category: 'pre-k-sight-words', src: 'sight-words', audio: 'not' },
+    { name: 'one', category: 'pre-k-sight-words', src: 'sight-words', audio: 'one' },
+    { name: 'play', category: 'pre-k-sight-words', src: 'sight-words', audio: 'play' },
+    { name: 'red', category: 'pre-k-sight-words', src: 'sight-words', audio: 'red' },
+    { name: 'run', category: 'pre-k-sight-words', src: 'sight-words', audio: 'run' },
+    { name: 'said', category: 'pre-k-sight-words', src: 'sight-words', audio: 'said' },
+    { name: 'see', category: 'pre-k-sight-words', src: 'sight-words', audio: 'see' },
+    { name: 'the', category: 'pre-k-sight-words', src: 'sight-words', audio: 'the' },
+    { name: 'three', category: 'pre-k-sight-words', src: 'sight-words', audio: 'three' },
+    { name: 'to', category: 'pre-k-sight-words', src: 'sight-words', audio: 'to' },
+    { name: 'two', category: 'pre-k-sight-words', src: 'sight-words', audio: 'two' },
+    { name: 'up', category: 'pre-k-sight-words', src: 'sight-words', audio: 'up' },
+    { name: 'we', category: 'pre-k-sight-words', src: 'sight-words', audio: 'we' },
+    { name: 'where', category: 'pre-k-sight-words', src: 'sight-words', audio: 'where' },
+    { name: 'yellow', category: 'pre-k-sight-words', src: 'sight-words', audio: 'yellow' },
+    { name: 'you', category: 'pre-k-sight-words', src: 'sight-words', audio: 'you' },
     { name: 'the', category: 'sight-words', src: 'sight-words', audio: 'the' },
     { name: 'of', category: 'sight-words', src: 'sight-words', audio: 'of' },
     { name: 'and', category: 'sight-words', src: 'sight-words', audio: 'and' },
@@ -278,8 +352,8 @@ const db: Database = {
     }
     return out;
   },
-  getMatchingCards: (num, category) => {
-    const values = db.getRandom(num, category);
+  getRandomMatching: (num, category) => {
+    const values = db.getRandom(num / 2, category);
     return [...values, ...values].sort(() => Math.random() - 0.5);
   },
 };

@@ -1,151 +1,62 @@
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 
-import db from '../db/db';
+import db, { GameType } from '../db/db';
 
 import FlashCardGame from '@/components/FlashCardGame';
 import MatchingGame from '@/components/MatchingGame';
-import SettingsCardNumber from '@/components/SettingsCardNumber';
+
+import MainMenu from '@/components/MainMenu';
+import Tile from '@/components/MainTile';
+import Game from '@/components/MainGame';
 
 export default function Home() {
-  const [game, setGame] = useState('menu');
-  const [numCards, setNumCards] = useState(16);
+  // Keep track of the state of the main menu
+  const [isMainMenuShowing, setMainMenuShowing] = useState(true);
+
+  // Keep track of the selected game
+  const [selectedGame, setSelectedGame] = useState<GameType>(db.games[0]);
+
+  // Keep track of the number of cards to be displayed
+  const [numberOfCards, setNumberOfCards] = useState(16);
 
   return (
     <>
+      {/* Show the main menu toggle button */}
       <button
         className='fixed z-50 p-4 bg-black text-white top-0 right-0'
-        onClick={() => setGame('menu')}
+        onClick={() => setMainMenuShowing(true)}
       >
         Main Menu
       </button>
-      {game === 'menu' && (
-        <>
-          <div className='fixed z-40 top-0 left-0 w-full p-2 h-[64px] bg-black'>
-            <SettingsCardNumber selected={numCards} onChange={setNumCards} />
-          </div>
 
+      {/* Display the main menu if it's showing */}
+      {isMainMenuShowing && (
+        <>
+          {/* Display the card number settings */}
+
+          <MainMenu selected={numberOfCards} onChange={setNumberOfCards} />
+
+          {/* Display the game selection tiles */}
           <div className='p-8'>
             <div className='grid grid-cols-6 mt-8'>
-              <Tile label='Uppercase' game='uppercase' setGame={setGame} />
-              <Tile label='Lowercase' game='lowercase' setGame={setGame} />
-              <Tile label='Numbers' game='numbers' setGame={setGame} />
-              <Tile label='Animals' game='animals' setGame={setGame} />
-              <Tile label='Colors' game='colors' setGame={setGame} />
-              <Tile label='Vehicles' game='vehicles' setGame={setGame} />
-              <Tile label='Sight Words' game='sight-words' setGame={setGame} />
-              <Tile label='Pre-K Sight' game='pre-k-sight-words' setGame={setGame} />
-            </div>
-
-            <div className='grid grid-cols-6 mt-3'>
-              <Tile label='Uppercase' game='m-uppercase' setGame={setGame} />
-              <Tile label='Lowercase' game='m-lowercase' setGame={setGame} />
-              <Tile label='Numbers' game='m-numbers' setGame={setGame} />
-              <Tile label='Animals' game='m-animals' setGame={setGame} />
-              <Tile label='Colors' game='m-colors' setGame={setGame} />
-              <Tile label='Vehicles' game='m-vehicles' setGame={setGame} />
-              <Tile label='Sight Words' game='m-sight-words' setGame={setGame} />
+              {db.games.map((game, index) => (
+                <Tile
+                  key={index}
+                  game={game}
+                  onClick={() => {
+                    setSelectedGame(game);
+                    setMainMenuShowing(false);
+                  }}
+                />
+              ))}
             </div>
           </div>
         </>
       )}
-      {game !== 'menu' && <Game game={game} setGame={setGame} numCards={numCards} />}
+
+      {/* Display the game if the main menu isn't showing */}
+      {!isMainMenuShowing && <Game game={selectedGame} numCards={numberOfCards} />}
     </>
   );
 }
-
-interface TileProps {
-  label: string;
-  game: string;
-  setGame: (game: string) => void;
-}
-
-const Tile = ({ label, game, setGame }: TileProps) => {
-  const src = '/images/' + label.toLowerCase().replaceAll(' ', '-') + '.png';
-  //if game contains m- then it is a matching game
-  const bg = game.includes('m-') ? 'bg-slate-700' : 'bg-red-700';
-  const type = game.includes('m-') ? 'matching' : 'flashcards';
-
-  return (
-    <div
-      onClick={() => setGame(game)}
-      className={`p-4 ${bg} rounded-md text-center m-4 hover:bg-black hover:cursor-pointer relative`}
-    >
-      <Image src={src} alt={label} height={480} width={320} priority />
-      <p className='text-white mt-2 text-base font-extrabold'>{label}</p>
-      <p className='text-white text-sm'>{type}</p>
-    </div>
-  );
-};
-
-interface GameProps {
-  game: string;
-  setGame: (game: string) => void;
-  numCards: number;
-}
-
-const Game = ({ game, setGame, numCards }: GameProps) => {
-  if (game === 'uppercase') {
-    let deck = db.getRandom(numCards, 'uppercase');
-    return <FlashCardGame initialDeck={deck} mainMenu={() => setGame('menu')} />;
-  }
-  if (game === 'lowercase') {
-    let deck = db.getRandom(numCards, 'lowercase');
-    return <FlashCardGame initialDeck={deck} mainMenu={() => setGame('menu')} />;
-  }
-  if (game === 'numbers') {
-    let deck = db.getRandom(numCards, 'numbers');
-    return <FlashCardGame initialDeck={deck} mainMenu={() => setGame('menu')} />;
-  }
-  if (game === 'animals') {
-    let deck = db.getRandom(numCards, 'animals');
-    return <FlashCardGame initialDeck={deck} mainMenu={() => setGame('menu')} />;
-  }
-  if (game === 'colors') {
-    let deck = db.getRandom(numCards, 'colors');
-    return <FlashCardGame initialDeck={deck} mainMenu={() => setGame('menu')} />;
-  }
-  if (game === 'vehicles') {
-    let deck = db.getRandom(numCards, 'vehicles');
-    return <FlashCardGame initialDeck={deck} mainMenu={() => setGame('menu')} />;
-  }
-  if (game === 'sight-words') {
-    let deck = db.getRandom(numCards, 'sight-words');
-    return <FlashCardGame initialDeck={deck} mainMenu={() => setGame('menu')} wordsOnly={true} />;
-  }
-  if (game === 'pre-k-sight-words') {
-    let deck = db.getRandom(numCards, 'pre-k-sight-words');
-    return <FlashCardGame initialDeck={deck} mainMenu={() => setGame('menu')} wordsOnly={true} />;
-  }
-  /* Matching Game */
-  if (game === 'm-uppercase') {
-    let deck = db.getMatchingCards(numCards / 2, 'uppercase');
-    return <MatchingGame initialDeck={deck} />;
-  }
-  if (game === 'm-lowercase') {
-    let deck = db.getMatchingCards(numCards / 2, 'lowercase');
-    return <MatchingGame initialDeck={deck} />;
-  }
-  if (game === 'm-numbers') {
-    let deck = db.getMatchingCards(numCards / 2, 'numbers');
-    return <MatchingGame initialDeck={deck} />;
-  }
-  if (game === 'm-animals') {
-    let deck = db.getMatchingCards(numCards / 2, 'animals');
-    return <MatchingGame initialDeck={deck} />;
-  }
-  if (game === 'm-colors') {
-    let deck = db.getMatchingCards(numCards / 2, 'colors');
-    return <MatchingGame initialDeck={deck} />;
-  }
-  if (game === 'm-vehicles') {
-    let deck = db.getMatchingCards(numCards / 2, 'vehicles');
-    return <MatchingGame initialDeck={deck} />;
-  }
-  if (game === 'm-sight-words') {
-    let deck = db.getMatchingCards(numCards / 2, 'sight-words');
-    return <MatchingGame initialDeck={deck} />;
-  }
-
-  return <></>;
-};

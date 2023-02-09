@@ -11,7 +11,6 @@ import FlashCardGameOver from '@/components/FlashCardGameOver';
 type FlashProps = {
   //initial deck is an array of objects that have two properties name: [string], and class: [string]
   initialDeck: CardType[];
-  mainMenu: () => void;
   wordsOnly?: boolean;
 };
 
@@ -19,7 +18,7 @@ interface Stats {
   [key: string]: number;
 }
 
-const FlashCardGame = ({ initialDeck, mainMenu, wordsOnly = false }: FlashProps) => {
+const FlashCardGame = ({ initialDeck, wordsOnly = false }: FlashProps) => {
   const [gameInProgress, setGameInProgress] = useState(true);
   const [deck, setDeck] = useState(
     initialDeck.map((card, i) => {
@@ -114,15 +113,15 @@ const FlashCardGame = ({ initialDeck, mainMenu, wordsOnly = false }: FlashProps)
 
           <div className='controls mt-[560px]'>
             <button className='accept' onClick={() => handleClick(true)}>
-              <span className='text-hidden'>👍 Yes!!</span>
+              <span className='text-hidden'>🥰 Yes!!</span>
             </button>
             <button className='reject' onClick={() => handleClick(false)}>
-              <span className='text-hidden'>👎 Not yet...</span>
+              <span className='text-hidden'>🥸 Not yet...</span>
             </button>
           </div>
         </>
       ) : (
-        <FlashCardGameOver stats={stats} mainMenu={mainMenu} />
+        <FlashCardGameOver stats={stats} />
       )}
     </div>
   );
