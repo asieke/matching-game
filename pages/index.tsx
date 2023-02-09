@@ -3,9 +3,6 @@ import Image from 'next/image';
 
 import db, { GameType } from '../db/db';
 
-import FlashCardGame from '@/components/FlashCardGame';
-import MatchingGame from '@/components/MatchingGame';
-
 import MainMenu from '@/components/MainMenu';
 import Tile from '@/components/MainTile';
 import Game from '@/components/MainGame';

@@ -12,6 +12,15 @@ const getSounds = (cards: CardType[]) => {
     match: new Howl({
       src: ['/sounds/match.mp3'],
     }),
+    canyoufind: new Howl({
+      src: ['/sounds/canyoufind.mp3'],
+    }),
+    tryagain: new Howl({
+      src: ['/sounds/tryagain.mp3'],
+    }),
+    awesomejob: new Howl({
+      src: ['/sounds/awesomejob.mp3'],
+    }),
   };
 
   for (let i = 0; i < cards.length; i++) {

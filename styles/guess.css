@@ -1,0 +1,12 @@
+.guess-container {
+  @apply w-full p-8 h-[97vh] overscroll-none overflow-hidden;
+  background-color: #96c1d2ff;
+}
+
+.guess-card {
+  @apply w-full h-[15vh] bg-slate-500 rounded-lg shadow-xl text-7xl flex items-center justify-center font-bold;
+}
+
+.guess-card:hover {
+  @apply bg-slate-600 cursor-pointer;
+}

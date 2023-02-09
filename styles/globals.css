@@ -4,6 +4,7 @@
 
 @import 'flashcards.css';
 @import 'matching.css';
+@import 'guess.css';
 
 html,
 body {

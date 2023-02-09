@@ -97,6 +97,13 @@ const db: Database = {
       img: 'uppercase',
       wordsOnly: false,
     },
+    {
+      label: 'Lowercase',
+      category: 'lowercase',
+      type: 'guessing',
+      img: 'lowercase',
+      wordsOnly: false,
+    },
   ],
   data: [
     { name: 'a', category: 'pre-k-sight-words', src: 'sight-words', audio: 'a' },
